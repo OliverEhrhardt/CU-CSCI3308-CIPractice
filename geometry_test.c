@@ -15,6 +15,31 @@
 
 #include "geometry.h"
 
+START_TEST(test_2d_area_triangle)
+{
+    coord_2d_t a;
+    coord_2d_t b;
+    coord_2d_t c;
+
+    a.x = a.y = 0;
+    b.x = b.y = c.x = 5;
+    c.y = -5;
+    ck_assert(coord_2d_area_triangle(&a, &b, &c) == 25);
+
+    a.x = a.y = 0;
+    b.x = b.y = c.x = -10;
+    c.y = 7;
+    ck_assert(coord_2d_area_triangle(&a, &b, &c) == 85);
+
+    a.x = a.y = 0;
+    b.y = c.y = -10;
+    c.x = -7; b.x = 7;
+    ck_assert(coord_2d_area_triangle(&a, &b, &c) == 70);
+
+
+}
+END_TEST
+
 /* coord_2d_eq Test */
 START_TEST(test_2d_eq)
 {
@@ -152,6 +177,9 @@ Suite* coord_2d_suite(void)
     /* Create Suite */
     Suite* s = suite_create("coord_2d");
 
+    TCase* tc_2d_area_triangle = tcase_create("coord_2d_area_triangle");
+    tcase_add_test(tc_2d_area_triangle, test_2d_area_triangle);
+
     /* Setup Test Cases */
     TCase* tc_2d_eq = tcase_create("coord_2d_eq");
     tcase_add_test(tc_2d_eq, test_2d_eq);
@@ -163,6 +191,7 @@ Suite* coord_2d_suite(void)
     tcase_add_test(tc_2d_midpoint, test_2d_midpoint);
 
     /* Add Cases to Suite */
+    suite_add_tcase(s, tc_2d_area_triangle);
     suite_add_tcase(s, tc_2d_eq);
     suite_add_tcase(s, tc_2d_dist);
     suite_add_tcase(s, tc_2d_midpoint);
