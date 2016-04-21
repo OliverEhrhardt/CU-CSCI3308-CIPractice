@@ -34,7 +34,7 @@ START_TEST(test_2d_area_triangle)
     a.x = a.y = 0;
     b.y = c.y = -10;
     c.x = -7; b.x = 7;
-    ck_assert(coord_2d_area_triangle(&a, &b, &c) == 70);
+    ck_assert(coord_2d_area_triangle(&a, &b, &c) == 71);
 
 
 }
